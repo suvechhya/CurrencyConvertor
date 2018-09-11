@@ -1,0 +1,51 @@
+<!Doctype html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Lato|Raleway" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<style type="text/css">
+		header{
+			font-family: 'Raleway', sans-serif;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<h1>Currency Convertor</h1>
+	</header>
+	<main ng-app="myApp" ng-controller="myCtrl" class="container-fluid">
+		<section class="row">
+			<div class="col-md-6 col-md-offset-3 col-xs-12 content panel panel-default">
+				<form name="conversionForm" class="panel-body">
+					<div class="form-group col-md-6 col-xs-12">
+						<input class="form-control" ng-model="fromcurrval" placeholder="" ng-change="calculateExchange(fromcurrval, 'from')">
+					</div>	
+					<div class="form-group col-md-6 col-xs-12">
+						<input list="fromcurrency" class="form-control" ng-model="fromcurrency" ng-change="filterFromCurrency(fromcurrency)" placeholder="From Currency Type">
+						<datalist id="fromcurrency">
+						  <option ng-repeat="curr in listOfFilteredFromCurrencies" value="{{curr.id}}">{{curr.currencyName}}</option>
+						</datalist>
+					</div>	
+					<div class="form-group col-md-6 col-xs-12">
+						<input class="form-control" ng-model="tocurrval" ng-change="calculateExchange(tocurrval, 'to')">
+					</div>
+					<div class="form-group col-md-6 col-xs-12">
+						<input list="tocurrency" class="form-control" ng-model="tocurrency" ng-change="filterToCurrency(tocurrency)" placeholder="To Currency Type">
+						<datalist id="tocurrency">
+						  <option ng-repeat="curr in listOfFilteredToCurrencies" value="{{curr.id}}">{{curr.currencyName}}</option>
+						</datalist>
+					</div>					
+				</form>
+				<h1 style="text-align: center">Exchange Rate: {{currencyRate}}</h1>
+			</div>
+		</section>
+	</main>
+	<footer></footer>
+</body>
+<script type="text/javascript" src="app.js"></script>
+</html>
