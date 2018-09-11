@@ -24,27 +24,39 @@ app.controller('myCtrl', function($scope, $http, $interval) {
 		$scope.listOfFilteredFromCurrencies=[];
 		if(val!=null && val.length>0){
 			$scope.listOfFilteredFromCurrencies = $scope.listOfCurrencies.filter(function (el) {
-			  return el['id'].toLowerCase().includes(val);
+			  return el['id'].toLowerCase()==val.toLowerCase();
 			});
-			if($scope.listOfFilteredFromCurrencies.length==1 && $scope.listOfFilteredFromCurrencies[0].toLowerCase()==val.toLowerCase()){
+			if($scope.listOfFilteredFromCurrencies.length==1 && $scope.listOfFilteredFromCurrencies[0].id.toLowerCase()==val.toLowerCase()){
 				$scope.fromcurrency=$scope.listOfFilteredFromCurrencies[0].id;
-				if($scope.tocurrency!=null && $scope.tocurrency.length>0 && $scope.fromcurrency!=null && $scope.fromcurrency.length>0)
+				if($scope.tocurrency!=null && $scope.tocurrency.length>0 && $scope.fromcurrency!=null && $scope.fromcurrency.length>0){
 					getInitialCurrencyRate($scope.tocurrency,$scope.fromcurrency);
+				}
+				$scope.listOfFilteredFromCurrencies=[];
+				return;
 			}
+			$scope.listOfFilteredFromCurrencies = $scope.listOfCurrencies.filter(function (el) {
+			  return el['id'].toLowerCase().includes(val.toLowerCase());
+			});
 		}
 	}
 
 	$scope.filterToCurrency=function(val){
 		$scope.listOfFilteredToCurrencies=[];
 		if(val!=null && val.length>0){
-			$scope.listOfFilteredToCurrencies = $scope.listOfCurrencies.filter(function (el) {
-			  return el['id'].toLowerCase().includes(val);
+		$scope.listOfFilteredToCurrencies = $scope.listOfCurrencies.filter(function (el) {
+			  return el['id'].toLowerCase()==val.toLowerCase();
 			});
-			if($scope.listOfFilteredToCurrencies.length==1 && $scope.listOfFilteredToCurrencies[0].toLowerCase()==val.toLowerCase()){
+			if($scope.listOfFilteredToCurrencies.length==1 && $scope.listOfFilteredToCurrencies[0].id.toLowerCase()==val.toLowerCase()){
 				$scope.tocurrency=$scope.listOfFilteredToCurrencies[0].id;
-				if($scope.tocurrency!=null && $scope.tocurrency.length>0 && $scope.fromcurrency!=null && $scope.fromcurrency.length>0)
+				if($scope.tocurrency!=null && $scope.tocurrency.length>0 && $scope.fromcurrency!=null && $scope.fromcurrency.length>0){
 					getInitialCurrencyRate($scope.tocurrency,$scope.fromcurrency);
+				}
+				$scope.listOfFilteredToCurrencies=[];
+				return;
 			}
+			$scope.listOfFilteredToCurrencies = $scope.listOfCurrencies.filter(function (el) {
+			  return el['id'].toLowerCase().includes(val.toLowerCase());
+			});
 		}
 	}
 
